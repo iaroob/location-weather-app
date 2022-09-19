@@ -1,7 +1,7 @@
 # Weather App
 
 A class project web app implemented using:
-  - <b>JAVA</b>, Sprint Boot to implement the functionality
+  - <b>JAVA</b>, Sprint Boot to implement the functionality and follows design patterns and MVC,
   - <b>SQLlite</b>, to store data
   - <b>HTML, CSS</b>, for the frontend part of the app
 
