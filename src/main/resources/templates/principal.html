@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org
+http://www.thymeleaf.org ">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" href="../static/css/style.css"
+        th:href="@{css/style.css}" rel="stylesheet" media="screen"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <script>
+    function myFunction() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+    var btn = document.getElementsByClassName("btn");
+    var i;
+    for (i = 0; i < btn.length; i++) {
+      btn[i].classList.toggle("dark-mode-btn");
+    }
+   }
+  </script>
+  <title>Nomeca</title>
+</head>
+<body>
+<nav id="navbar">
+  <div class="container">
+    <ul>
+      <li><div class="cont-dark">
+        <label class="switch"><input type="checkbox" onClick="myFunction()"/><div></div>
+        </label>
+      </div></li>
+      <li><a href="/principal" class="dropbtn">Inicio</a></li>
+      <div class="dropdown">
+      <li>
+        <a href="#" class="dropbtn">Ubicaciones</a>
+        <div class="dropdown-content">
+          <a style="font-size: 15px;" href="/ubicacion/list-activas">Ubicaciones activas</a>
+          <a style="font-size: 15px;" href="/ubicacion/list-NoActivas">Ubicaciones No activas</a>
+          <a style="font-size: 15px;" href="/ubicacion/list-previas">Historial de Ubicaciones</a>
+          <a style="font-size: 15px;" href="/ubicacion/mis-ubicaciones">Ubicaciones favoritas</a>
+        </div>
+      </li>
+      </div>
+      <div class="dropdown">
+      <li >
+        <a href="#" class="dropbtn">Servicios</a>
+        <div class="dropdown-content">
+          <a style="font-size: 15px;" href="/servicios/InfoServicios">Servicios Disponibles</a>
+          <a style="font-size: 15px;" href="/servicios/servicios-activos">Servicios activos</a>
+        </div>
+      </li>
+      </div>
+      <div><li><a href="/servicios/info">Noticias</a></li></div>
+      <div><li><a href="/meteorologia">Meteorologia</a></li></div>
+      <div><li><a href="/servicios/eventos">Eventos</a></li></div>
+
+    </ul>
+  </div>
+</nav>
+<button class="btn btn-atras" style="margin-top: 15px;" onclick="history.back()">Volver al inicio</button>
+
+<div class="general">
+<div class="big">
+  <div class="body-container-1">
+    <div style="line-height: 40px;" class="box-1">
+      <h1>Información general</h1>
+      <div class="info-temp">
+      <h2 style="font-weight: 300; margin-left: 10px;"><i class="fas fa-calendar-alt"></i> Fecha: <span id="currentDate"></span></h2>
+      <h2 style="font-weight: 300; margin-left: 10px;"><i class="fas fa-clock"></i> Hora: <span id="currentTime"></span></h2>
+      <h2 style="font-weight: 300; margin-left: 10px;"><i class="fas fa-temperature-high"></i> Temperatura:
+        <br><span style="margin-left: 60px; font-size: 20px;" th:text="${ubicacion1} + ': ' + ${temp1} + ', ' + ${descrip1}"></span>
+
+        <br><span style="margin-left: 60px; font-size: 20px;" th:text="${ubicacion2} + ': ' + ${temp2} + ', ' + ${descrip2}"></span>
+
+        <br><span style="margin-left: 60px; font-size: 20px;" th:text="${ubicacion3} + ': ' + ${temp3} + ', ' + ${descrip3}"></span>
+
+      </h2>
+      </div>
+    </div>
+  </div>
+<div class="body-container">
+    <div class="box-2">
+      <h3><a class="box-style-main" th:href="@{'/ubicacion/infoUbicacion/'+${ubicacion1}}" th:text="${ubicacion1}" ></a></h3>
+    </div>
+    <div class="box-3">
+      <h3><a class="box-style-main" th:href="@{'/ubicacion/infoUbicacion/'+${ubicacion2}}" th:text="${ubicacion2}" ></a></h3>
+    </div>
+    <div class="box-4">
+      <h3><a class="box-style-main" th:href="@{'/ubicacion/infoUbicacion/'+${ubicacion3}}" th:text="${ubicacion3}" ></a></h3>
+    </div>
+    <div class="box-5">
+      <h3><a id="adubic" href="/ubicacion/add">+<br>Añadir ubicación</a></h3>
+    </div>
+    <div class="box-5">
+      <h3><a id="elimubic" href="/ubicacion/elimUbic">
+        <i class="fas fa-trash"></i>
+        <br>Borrar ubicación</a></h3>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+   var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    document.getElementById("currentDate").innerHTML = date;
+    var today = new Date();
+    var currentTime = document.getElementById('currentTime');
+
+    function time() {
+      var d = new Date();
+      var s = d.getSeconds();
+      var m = d.getMinutes();
+      var h = d.getHours();
+      currentTime.textContent =
+        ("0" + h).substr(-2) + ":" + ("0" + m).substr(-2) + ":" + ("0" + s).substr(-2);
+    }
+
+    setInterval(time, 1000);
+</script>
+</body>
+</html>
